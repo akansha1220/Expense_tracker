@@ -70,6 +70,46 @@ A full-stack Expense Tracker application built with:
 
 ---
 
+Here’s a step-by-step guide to modify the `main.ts` file in the backend and the `api.js` file in the frontend:
+
+### Backend - Update CORS Configuration
+
+1. Open the file located at `/backend/src/main.ts`.
+2. Add or update the `app.enableCors` configuration to include your frontend's URL:
+   ```typescript
+   app.enableCors({
+       origin: 'http://localhost:3001', // Replace with your frontend URL
+       methods: 'GET,POST,PUT,DELETE',
+       allowedHeaders: 'Content-Type,Authorization',
+       credentials: false, // Set to true if credentials like cookies are required
+   });
+   ```
+3. Save the file and restart the backend application:
+   ```bash
+   npm run start:dev
+   ```
+
+### Frontend - Update API Base URL
+
+1. Navigate to `/frontend/src/api.js` (or the location of your API configuration file).
+2. Modify the Axios base URL to match your backend's URL:
+   ```javascript
+   import axios from 'axios';
+
+   const API = axios.create({
+       baseURL: 'http://localhost:3000/api/v1', // Replace with your backend URL
+   });
+
+   export default API;
+   ```
+3. Save the file.
+
+### Notes
+- Ensure the ports match between the configurations in `.env` files, backend `main.ts`, and frontend `api.js`.
+- For production, replace `http://localhost:3000` and `http://localhost:3001` with your actual deployed URLs and use secure HTTPS.
+
+-----
+
 ## Application Features
 
 1. **User Registration and Authentication**:

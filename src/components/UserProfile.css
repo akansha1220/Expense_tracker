@@ -1,0 +1,162 @@
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #0288d1, #004d40); /* Green-Blue Gradient */
+}
+
+/* Navbar Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #004d40; /* Deep green background */
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links button {
+  background-color: #ffffff;
+  color: #004d40;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: #0288d1; /* Blue color on hover */
+  color: white;
+}
+
+/* User Widget Styling */
+.user-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-widget img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-widget span {
+  font-weight: bold;
+  color: white;
+}
+
+.user-widget button {
+  padding: 8px 12px;
+  background-color: #0288d1; /* Blue button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.user-widget button:hover {
+  background-color: #01579b; /* Darker blue on hover */
+}
+
+/* Profile Content Container */
+.profile-content {
+  margin: 20px auto;
+  max-width: 800px; /* Adjust width for larger screens */
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Profile Card Styling */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Profile Information */
+.profile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f1f1f1; /* Light grey background for each info block */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info label {
+  font-weight: bold;
+  color: #555;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-info p {
+    text-align: left;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .user-widget {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .user-widget img {
+    width: 35px;
+    height: 35px;
+  }
+}

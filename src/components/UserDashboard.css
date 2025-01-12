@@ -1,0 +1,235 @@
+/* General Styles */
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  min-height: 100vh;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links button {
+  margin-right: 10px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #185a9d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: #43cea2;
+}
+
+.user-widget {
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #185a9d;
+}
+
+.user-widget span {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.user-widget button {
+  padding: 6px 10px;
+  font-size: 14px;
+  color: white;
+  background-color: #ff4567;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-widget button:hover {
+  background-color: #ff8042;
+}
+
+/* Main Content */
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+h2 {
+  color: white;
+  font-size: 28px;
+}
+
+.section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
+}
+
+h3 {
+  font-size: 20px;
+  color: #185a9d;
+  margin-bottom: 15px;
+}
+
+/* Filter Container */
+.filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.filter-options {
+  display: flex;
+  gap: 20px;
+}
+
+.filter-button {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: #43cea2;
+  color: white;
+}
+
+.filter-button.active {
+  background-color: #185a9d;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Custom Date Range Inputs */
+.custom-date-container input {
+  margin: 5px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Chart Container */
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Pie Chart Styles */
+.recharts-surface {
+  background-color: #ffffff !important;
+  border-radius: 10px;
+}
+
+/* Scrollable List */
+.scrollable-list-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.expense-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expense-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.expense-list li:last-child {
+  border-bottom: none;
+}
+
+.expense-list li div {
+  display: flex;
+  flex-direction: column;
+}
+
+.expense-list li span {
+  margin: 2px 0;
+}
+
+.expense-list li span:first-child {
+  font-weight: bold;
+  color: #185a9d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .chart-container {
+    flex-direction: column;
+  }
+
+  .nav-links button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .user-widget span {
+    font-size: 12px;
+  }
+
+  .filter-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-button {
+    padding: 8px 15px;
+  }
+}

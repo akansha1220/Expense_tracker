@@ -1,99 +1,152 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Expense Tracker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A full-stack Expense Tracker application built with:
+- **Backend**: NestJS
+- **Frontend**: ReactJS
+- **Database**: PostgreSQL (managed with Docker)
+### NOTE : Created the 3 different branches for each component
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Folder Structure
+- `/backend`: Contains the NestJS backend code.
+- `/frontend`: Contains the ReactJS frontend code.
+- `/database`: Configuration for PostgreSQL Docker setup.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Setup Instructions
 
-## Project setup
+### Prerequisites
+1. Install Docker and Docker Compose.
+2. Install Node.js (v16 or above recommended).
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+### Step 1: Set Up PostgreSQL and pgAdmin Containers
+1. Navigate to the `/database` directory.
+2. Run the following command to start the PostgreSQL and pgAdmin containers:
+   ```bash
+   docker-compose up -d
+   ```
+3. Verify that PostgreSQL is running on the specified port (default: `5432`) and pgAdmin is accessible.
+4. Use pgAdmin to check if the connection to the PostgreSQL database is successful.
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+### Step 2: Configure Backend
+1. Navigate to the `/backend` directory.
+2. Create a `.env` file by copying the provided `.env.example` file:
+   ```bash
+   cp .env.example .env
+   ```
+3. Update the `.env` file with the following information:
+   - **Database URL**: Ensure the correct port, username, password, and database name match your PostgreSQL setup.
+   - **Application Port**: Default is `3000`. You can customize it.
 
-# production mode
-$ npm run start:prod
-```
+4. Run database migrations to create the required tables:
+   ```bash
+   npm run migration:run
+   ```
+5. Start the backend application:
+   ```bash
+   npm run start:dev
+   ```
+   The backend should now be running at `http://localhost:3000`.
 
-## Run tests
+---
 
-```bash
-# unit tests
-$ npm run test
+### Step 3: Configure Frontend
+1. Navigate to the `/frontend` directory.
+2. Create a `.env` file by copying the provided `.env.example` file:
+   ```bash
+   cp .env.example .env
+   ```
+3. Update the `.env` file to specify the backend API URL (e.g., `http://localhost:3000`) and the frontend application port (e.g., `3001`).
+4. Install dependencies and start the frontend application:
+   ```bash
+   npm install
+   npm start
+   ```
+   The frontend should now be running at `http://localhost:3001`.
 
-# e2e tests
-$ npm run test:e2e
+---
 
-# test coverage
-$ npm run test:cov
-```
+Here’s a step-by-step guide to modify the `main.ts` file in the backend and the `api.js` file in the frontend:
 
-## Deployment
+### Backend - Update CORS Configuration
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+1. Open the file located at `/backend/src/main.ts`.
+2. Add or update the `app.enableCors` configuration to include your frontend's URL:
+   ```typescript
+   app.enableCors({
+       origin: 'http://localhost:3001', // Replace with your frontend URL
+       methods: 'GET,POST,PUT,DELETE',
+       allowedHeaders: 'Content-Type,Authorization',
+       credentials: false, // Set to true if credentials like cookies are required
+   });
+   ```
+3. Save the file and restart the backend application:
+   ```bash
+   npm run start:dev
+   ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Frontend - Update API Base URL
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+1. Navigate to `/frontend/src/api.js` (or the location of your API configuration file).
+2. Modify the Axios base URL to match your backend's URL:
+   ```javascript
+   import axios from 'axios';
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+   const API = axios.create({
+       baseURL: 'http://localhost:3000/api/v1', // Replace with your backend URL
+   });
 
-## Resources
+   export default API;
+   ```
+3. Save the file.
 
-Check out a few resources that may come in handy when working with NestJS:
+### Notes
+- Ensure the ports match between the configurations in `.env` files, backend `main.ts`, and frontend `api.js`.
+- For production, replace `http://localhost:3000` and `http://localhost:3001` with your actual deployed URLs and use secure HTTPS.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+-----
 
-## Support
+## Application Features
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1. **User Registration and Authentication**:
+   - Navigate to the signup page to create a new user.
+   - Login with valid credentials to access the dashboard.
+   - Try logging in with invalid credentials to test error handling.
+   - Authentication is managed using JWT.
 
-## Stay in touch
+2. **User Dashboard**:
+   - Displays data visualization of all expense categories and their percentage weights.
+   - Filter visualization by specific date, month, or custom date range.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+3. **Manage Expenses**:
+   - Add new expenses through the expense management section.
+   - Newly added expenses will be reflected on the dashboard immediately.
 
-## License
+4. **User Profile**:
+   - View current user details on the dashboard.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## Testing
+- Test JWT authentication by logging in with both valid and invalid credentials.
+- Add expenses and verify updates in real-time on the dashboard.
+- Use date filters to visualize expenses for specific periods.
+
+---
+
+## Troubleshooting
+1. Ensure Docker containers for PostgreSQL and pgAdmin are running.
+2. Verify `.env` configurations for both backend and frontend.
+3. Check application logs for any errors:
+   - **Backend**: `npm run start:dev`
+   - **Frontend**: `npm start`
+4. Confirm that database migrations are applied successfully.
+
+---
+
+Enjoy tracking your expenses efficiently!
+

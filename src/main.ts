@@ -11,7 +11,7 @@ async function bootstrap() {
 
   // Enable CORS for all origins (adjust for production)
   app.enableCors({
-    origin: '*', // Replace with specific origin(s) in production
+    origin: 'http://localhost:3001', // Replace with specific origin(s) in production
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
     credentials: false, // Set to true if cookies or credentials are required

@@ -81,8 +81,12 @@ export class ExpenseController{
   }
 
   @Get('/stats')
-  async getStats(@Query() query: GetStatsDto) {
-    return this.expenseService.getStats(query);
+  async getStats(
+  @AuthenticatedUser() user:User,
+  @Query('filter') filter: string,
+  @Query('startDate') startDate?: string,
+  @Query('endDate') endDate?: string) {
+    return this.expenseService.getStats(filter,user, startDate, endDate);
   }
 
 }

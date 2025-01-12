@@ -19,41 +19,19 @@ const UserDashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchPieChartData(filter, customRange);
+      await fetchPieChartData();
       await fetchExpenseList();
       await fetchUserInfo();
     };
     fetchData();
   }, [filter, customRange]);
 
-  const fetchPieChartData = async (filter = 'all', customRange = null) => {
-    let startDate = '';
-    let endDate = '';
-
-    if (filter === 'today') {
-      const today = new Date();
-      startDate = endDate = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-    } else if (filter === 'month') {
-      const now = new Date();
-      startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]; // First day of the month
-      endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0]; // Last day of the month
-    } else if (filter === 'all') {
-      startDate = '1970-01-01'; // Beginning of UNIX time
-      endDate = new Date().toISOString().split('T')[0]; // Current date
-    } else if (filter === 'custom' && customRange) {
-      if (customRange.startDate && customRange.endDate) {
-        startDate = new Date(customRange.startDate).toISOString().split('T')[0];
-        endDate = new Date(customRange.endDate).toISOString().split('T')[0];
-      }
-    }
-
+  const fetchPieChartData = async () => {
     try {
       const { data } = await API.get('/expense/stats', {
-        params: { startDate, endDate },
+        params: { filter, startDate: customRange.startDate, endDate: customRange.endDate },
       });
-
-      // Adjust the data structure to match the Pie chart's expected format
-      const formattedData = data.map(item => ({
+      const formattedData = data.map((item) => ({
         name: item.type,
         value: parseFloat(item.totalAmount),
       }));
@@ -107,8 +85,8 @@ const UserDashboard = () => {
         {/* Expense Statistics Section */}
         <div className="section">
           <h3>Expense Statistics</h3>
-          
-          {/* Filter Options (Styled as Attractive Buttons) */}
+
+          {/* Filter Options */}
           <div className="filter-container">
             <label>Filter by: </label>
             <div className="filter-options">
@@ -187,7 +165,7 @@ const UserDashboard = () => {
             {expenseList.map((expense) => (
               <li key={expense.id}>
                 <div>
-                  <span>{new Date(expense.createdAt).toLocaleDateString()}</span>
+                  <span>{new Date(expense.expenseDate).toLocaleDateString()}</span>
                   <span>{expense.type}</span>
                 </div>
                 <div>

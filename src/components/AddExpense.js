@@ -83,11 +83,11 @@ const AddExpense = () => {
               <option value="">Select</option>
               <option value="food">Food</option>
               <option value="shopping">Shopping</option>
-              <option value="rent">House Rent</option>
+              <option value="houserent">House Rent</option>
               <option value="bills">Bills</option>
               <option value="entertainment">Entertainment</option>
               <option value="transport">Transport</option>
-              <option value="other">Other</option>
+              <option value="others">Other</option>
             </select>
           </div>
           <div className="form-group">

@@ -4,6 +4,7 @@ A full-stack Expense Tracker application built with:
 - **Backend**: NestJS
 - **Frontend**: ReactJS
 - **Database**: PostgreSQL (managed with Docker)
+### NOTE : Created the 3 different branches for each component
 
 ## Folder Structure
 - `/backend`: Contains the NestJS backend code.
